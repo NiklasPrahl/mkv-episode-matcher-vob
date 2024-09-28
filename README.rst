@@ -11,7 +11,7 @@ Quick start
 
 To use the MKV Episode Matcher, follow these steps:
 
-1. Install ``pip install mkv-episode-matcher``
+1. Install ``pip install mkv-episode-matcher-vob``
 2. Obtain an API key from TMDb (https://developers.themoviedb.org/authentication/getting-a-apikey).
 3. (Optional) - Obtain an API key from Opensubtitles.com by creating an API consumer (https://www.opensubtitles.com/en/consumers)
 4. Alternatively, add the .srt files to the cache directory. On Windows: ``C:\Users\YOUR_USER_NAME\.mkv-episode-matcher\cache\data\SHOW_NAME``. The files need to be named with the season and episode, e.g. ``Show Name - S01E01.srt``.
