@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: mkv-episode-matcher-vob
-Version: 0.1.3.dev2+g03172b8
+Version: 0.1.3
 Summary: The MKV Episode Matcher VOB is a fork of MKV Episode Matcher for identifying TV series episodes from MKV files and renaming the files accordingly with additional support for VOB files.
 Home-page: https://github.com/NiklasPrahl/mkv-episode-matcher-vob
 Author: Niklas Prahl (credits to: Jonathan Sakkos, mkv_episode_matcher)
