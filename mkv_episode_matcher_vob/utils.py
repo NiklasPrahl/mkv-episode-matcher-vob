@@ -8,9 +8,9 @@ import requests
 from loguru import logger
 from opensubtitlescom import OpenSubtitles
 
-from mkv_episode_matcher.__main__ import CACHE_DIR, CONFIG_FILE
-from mkv_episode_matcher.config import get_config
-from mkv_episode_matcher.tmdb_client import fetch_season_details
+from mkv_episode_matcher_vob.__main__ import CACHE_DIR, CONFIG_FILE
+from mkv_episode_matcher_vob.config import get_config
+from mkv_episode_matcher_vob.tmdb_client import fetch_season_details
 
 
 def check_filename(filename, series_title, season_number, episode_number):

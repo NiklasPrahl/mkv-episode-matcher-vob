@@ -4,11 +4,11 @@ import re
 
 from loguru import logger
 
-from mkv_episode_matcher-vob.__main__ import CACHE_DIR, CONFIG_FILE
-from mkv_episode_matcher-vob.config import get_config
-from mkv_episode_matcher-vob.mkv_to_srt import convert_mkv_to_srt
-from mkv_episode_matcher-vob.tmdb_client import fetch_show_id
-from mkv_episode_matcher-vob.utils import check_filename, cleanup_ocr_files, get_subtitles
+from mkv_episode_matcher_vob.__main__ import CACHE_DIR, CONFIG_FILE
+from mkv_episode_matcher_vob.config import get_config
+from mkv_episode_matcher_vob.mkv_to_srt import convert_mkv_to_srt
+from mkv_episode_matcher_vob.tmdb_client import fetch_show_id
+from mkv_episode_matcher_vob.utils import check_filename, cleanup_ocr_files, get_subtitles
 
 
 # hash_data = {}

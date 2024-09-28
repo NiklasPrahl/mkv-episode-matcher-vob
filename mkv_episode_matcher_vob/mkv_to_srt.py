@@ -16,8 +16,8 @@ from loguru import logger
 from pgsreader import PGSReader
 from PIL import Image, ImageOps
 
-from mkv_episode_matcher-vob.__main__ import CONFIG_FILE
-from mkv_episode_matcher-vob.config import get_config
+from mkv_episode_matcher_vob.__main__ import CONFIG_FILE
+from mkv_episode_matcher_vob.config import get_config
 
 def convert_mkv_to_sup(mkv_file, output_dir):
     """
