@@ -1,6 +1,6 @@
-===================
+=======================
 MKV Episode Matcher VOB
-===================
+=======================
 
 |docs|  |pypi|
 
@@ -44,7 +44,7 @@ Then add the ``--get-subs True`` flag to the CLI call
 The latter needs a path specification to the ``BDSup2Sub.exe`` in the config.ini file.
 
 Troubleshooting 
-============
+===============
 
 1. Make sure that all the necessary tools are installed and properly linked.
 
