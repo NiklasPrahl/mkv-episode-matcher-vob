@@ -35,7 +35,7 @@ def process_show(season=None, dry_run=False, get_subs=False):
     season_paths = [
         os.path.join(show_dir, d)
         for d in os.listdir(show_dir)
-        if os.path.isdir(os.path.join(show_dir, d))
+        if not d.startswith('.') and os.path.isdir(os.path.join(show_dir, d))
     ]
     logger.info(
         f"Found {len(season_paths)} seasons for show '{os.path.basename(show_dir)}'"
@@ -49,18 +49,25 @@ def process_show(season=None, dry_run=False, get_subs=False):
         mkv_files = [
             os.path.join(show_dir, season)
             for f in os.listdir(show_dir)
-            if f.endswith(".mkv")
+            if f.endswith(".mkv") and not f.startswith('.') and os.path.isfile(os.path.join(season_path, f))
         ]
 
         season_path = os.path.join(show_dir, f"Season {season}")
     else:
-        for season_path in os.listdir(show_dir):
-            season_path = os.path.join(show_dir, season_path)
-            mkv_files = [
-                os.path.join(season_path, f)
-                for f in os.listdir(season_path)
-                if f.endswith(".mkv")
-            ]
+         for potential_season in os.listdir(show_dir):
+            if potential_season == ".DS_Store":
+                continue
+            
+            season_path = os.path.join(show_dir, potential_season)
+            if os.path.isdir(season_path):
+                mkv_files = [
+                    os.path.join(season_path, f)
+                    for f in os.listdir(season_path)
+                    if f.endswith(".mkv") and not f.startswith('.') and os.path.isfile(os.path.join(season_path, f))
+                ]
+            else:
+                logger.error(f"'{season_path}' is not a directory, skipping.")
+                continue
     # Filter out files that have already been processed
     for f in mkv_files:
         if check_filename(f):
@@ -88,6 +95,7 @@ def check_filename(filename):
     # Check if the filename matches the expected format
     match = re.match(r".*S\d+E\d+", filename)
     return bool(match)
+
 def extract_srt_text(filepath):
     """
     Extracts the text from an SRT file.

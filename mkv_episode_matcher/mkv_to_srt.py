@@ -19,36 +19,121 @@ from PIL import Image, ImageOps
 from mkv_episode_matcher.__main__ import CONFIG_FILE
 from mkv_episode_matcher.config import get_config
 
-
 def convert_mkv_to_sup(mkv_file, output_dir):
     """
-    Convert an .mkv file to a .sup file using FFmpeg and pgs2srt.
+    Convert an .mkv file to a .sup file using FFmpeg as primary and mkvextract as a fallback.
 
     Args:
         mkv_file (str): Path to the .mkv file.
         output_dir (str): Path to the directory where the .sup file will be saved.
 
     Returns:
-        str: Path to the converted .sup file.
+        str: Path to the converted .sup file or None if conversion failed.
     """
     # Get the base name of the .mkv file without the extension
     base_name = os.path.splitext(os.path.basename(mkv_file))[0]
 
     # Construct the output .sup file path
     sup_file = os.path.join(output_dir, f"{base_name}.sup")
+    
     if not os.path.exists(sup_file):
         logger.info(f"Processing {mkv_file} to {sup_file}")
-        # FFmpeg command to convert .mkv to .sup
+        
+        # Try FFmpeg command to convert .mkv to .sup
         ffmpeg_cmd = ["ffmpeg", "-i", mkv_file, "-map", "0:s:0", "-c", "copy", sup_file]
         try:
             subprocess.run(ffmpeg_cmd, check=True)
-            logger.info(f"Converted {mkv_file} to {sup_file}")
+            logger.info(f"Converted {mkv_file} to {sup_file} using FFmpeg")
+            return sup_file
         except subprocess.CalledProcessError as e:
-            logger.error(f"Error converting {mkv_file}: {e}")
+            logger.error(f"FFmpeg failed for {mkv_file}: {e}")
+            
+            # Fallback to mkvextract
+            logger.info(f"Trying mkvextract for {mkv_file}")
+            # Make sure the output directory exists
+            idx_file = os.path.join(output_dir, f"{base_name}.idx")
+            sub_file = os.path.join(output_dir, f"{base_name}.sub")
+            english_track_id = get_english_subtitle_track(mkv_file)
+            mkvextract_cmd = ["mkvextract", "tracks", mkv_file, f"{english_track_id}:{sub_file}"]
+            try:
+                subprocess.run(mkvextract_cmd, check=True)
+                logger.info(f"Extracted subtitles for {mkv_file} using mkvextract")
+                if os.path.exists(sub_file) and os.path.exists(idx_file):
+                    # Convert .sub/.idx to .sup using BDSup2Sub
+                    config = get_config(CONFIG_FILE)
+                    bdsup2sub_jar_path = config.get("BDSup2Sub_path") 
+                    bdsup2sub_cmd = [
+                        'java', '-jar', bdsup2sub_jar_path,
+                        sub_file,  # Input .sub file
+                        '-o', sup_file  # Output file
+                    ]
+                    try:
+                        subprocess.run(bdsup2sub_cmd, check=True, capture_output=True, text=True)
+                        logger.info(f"Converted {sub_file} and {idx_file} to {sup_file}")
+                    
+                        # Clean up temporary files
+                        os.remove(sub_file)
+                        os.remove(idx_file)
+                    
+                        return sup_file
+                    except subprocess.CalledProcessError as e:
+                        logger.error(f"SubtitleEdit conversion failed for {sub_file}: {e}")
+                        logger.error(f"SubtitleEdit output: {e.output}")
+                else:
+                    logger.error(f"Missing .sub or .idx file for {mkv_file}")
+            except subprocess.CalledProcessError as e:
+                logger.error(f"mkvextract failed for {mkv_file}: {e}")
+                return None
     else:
         logger.info(f"File {sup_file} already exists, skipping")
-    return sup_file
+        return sup_file
 
+def get_english_subtitle_track(mkv_file):
+    """
+    Get the track ID of the English subtitle track from an MKV file.
+
+    This function runs the `mkvinfo` command to parse the available tracks
+    in the specified MKV file. It searches for subtitle tracks labeled
+    as "English" and returns the corresponding track ID.
+
+    Args:
+        mkv_file (str): Path to the MKV file.
+
+    Returns:
+        str: The track ID of the English subtitle track.
+        
+    """
+    try:
+        # Run mkvinfo to get track information
+        output = subprocess.check_output(["mkvinfo", mkv_file], text=True) 
+       
+        english_track_id = None
+
+        # Parse the output line by line
+        lines = output.splitlines()
+        for i, line in enumerate(lines):
+            # Check if the line contains a subtitle track
+            if "Track type: subtitles" in line:
+                # Look ahead in lines to get the language information
+                for j in range(i, i+10):  # assuming language line appears within next 10 lines
+                    if "Language: eng" in lines[j]:
+                        # Retrieve the track ID from earlier in lines
+                        for k in range(i, 0, -1):  # going backwards to find track ID
+                            if "Track number:" in lines[k]:
+                                # Extract the mkvextract track ID from the line
+                                parts = lines[k].split(" ")
+                                english_track_id = parts[-1].strip('()')
+                                
+                                # Print the entire track info to console
+                                track_info = "\n".join(lines[i:k+7])  # Collecting track-related lines
+                                print("Found english subtitle:"+track_info+"; track_id: "+ english_track_id)
+                                                                
+                                return english_track_id
+        return None  # If no English subtitle track is found
+    
+    except subprocess.CalledProcessError as e:
+        print(f"Error running mkvinfo: {e}")
+        raise
 
 @logger.catch
 def perform_ocr(sup_file_path):
@@ -149,7 +234,6 @@ def perform_ocr(sup_file_path):
         with open(srt_file, "w") as f:
             f.write(output)
         logger.info(f"Saved to: {srt_file}")
-
 
 def convert_mkv_to_srt(season_path, mkv_files):
     """

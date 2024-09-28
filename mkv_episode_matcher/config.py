@@ -25,6 +25,7 @@ def set_config(
     open_subtitles_user_agent,
     open_subtitles_username,
     open_subtitles_password,
+    BDSup2Sub_path,
     show_dir,
     file,
     tesseract_path=None,
@@ -54,6 +55,7 @@ def set_config(
         "open_subtitles_user_agent": str(open_subtitles_user_agent),
         "open_subtitles_username": str(open_subtitles_username),
         "open_subtitles_password": str(open_subtitles_password),
+        "BDSup2Sub_path": str(BDSup2Sub_path),
         "tesseract_path": str(tesseract_path),
     }
     logger.info(

@@ -94,6 +94,7 @@ def main():
     open_subtitles_user_agent = ""
     open_subtitles_username = ""
     open_subtitles_password = ""
+    BDSup2Sub_path = ""
     # Check if API key is provided via command-line argument
     tmdb_api_key = args.tmdb_api_key
 
@@ -116,6 +117,7 @@ def main():
         open_subtitles_user_agent = cached_config.get("open_subtitles_user_agent")
         open_subtitles_username = cached_config.get("open_subtitles_username")
         open_subtitles_password = cached_config.get("open_subtitles_password")
+        BDSup2Sub_path = cached_config.get("BDSup2Sub_path")
     except:
         pass
     if args.get_subs:
@@ -130,6 +132,9 @@ def main():
 
         if not open_subtitles_password:
             open_subtitles_password = input("Enter your OpenSubtitles Password: ")
+            
+        if not BDSup2Sub_path:
+            BDSup2Sub_path = input("Enter the BDSup2Sub Path: ")
 
     # If show directory is provided via command-line argument, use it
     show_dir = args.show_dir
@@ -162,6 +167,7 @@ def main():
         open_subtitles_user_agent,
         open_subtitles_username,
         open_subtitles_password,
+        BDSup2Sub_path,
         show_dir,
         CONFIG_FILE,
         tesseract_path=tesseract_path,
