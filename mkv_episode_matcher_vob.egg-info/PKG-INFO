@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: mkv-episode-matcher-vob
-Version: 0.1.2
+Version: 0.1.3.dev2+g03172b8
 Summary: The MKV Episode Matcher VOB is a fork of MKV Episode Matcher for identifying TV series episodes from MKV files and renaming the files accordingly with additional support for VOB files.
 Home-page: https://github.com/NiklasPrahl/mkv-episode-matcher-vob
 Author: Niklas Prahl (credits to: Jonathan Sakkos, mkv_episode_matcher)
@@ -28,9 +28,9 @@ Requires-Dist: tmdb_client
 Requires-Dist: pytesseract
 Requires-Dist: opensubtitlescom
 
-===================
+=======================
 MKV Episode Matcher VOB
-===================
+=======================
 
 |docs|  |pypi|
 
@@ -74,7 +74,7 @@ Then add the ``--get-subs True`` flag to the CLI call
 The latter needs a path specification to the ``BDSup2Sub.exe`` in the config.ini file.
 
 Troubleshooting 
-============
+===============
 
 1. Make sure that all the necessary tools are installed and properly linked.
 
