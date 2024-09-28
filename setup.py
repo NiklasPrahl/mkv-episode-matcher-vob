@@ -1,5 +1,5 @@
 """
-    Setup file for mkv_episode_matcher.
+    Setup file for mkv_episode_matcher_vob.
 """
 from setuptools import setup
 

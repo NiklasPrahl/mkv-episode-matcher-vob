@@ -44,7 +44,7 @@ Issues = "https://github.com/Jsakkos/mkv-episode-matcher-vob/issues"
 Source = "https://github.com/Jsakkos/mkv-episode-matcher-vob"
 
 [project.scripts]
-mkv-match = "mkv_episode_matcher-vob.__main__:main"
+mkv-match = "mkv_episode_matcher_vob.__main__:main"
 
 [tool.ruff.format]
 preview = true
@@ -61,7 +61,7 @@ extend-select = ["C901"]
 known-first-party = ["foo", "bar"]
 
 [tool.coverage.run]
-source_pkgs = ["mkv_episode_matcher-vob", "tests"]
+source_pkgs = ["mkv_episode_matcher_vob", "tests"]
 branch = true
 parallel = true
 omit = [
@@ -69,8 +69,8 @@ omit = [
 ]
 
 [tool.coverage.paths]
-calcy = ["mkv-episode-matcher-vob/mkv_episode_matcher-vob", "*/mkv-episode-matcher-vob/mkv_episode_matcher-vob"]
-tests = ["tests", "*/mkv_episode_matcher-vob/tests"]
+calcy = ["mkv-episode-matcher-vob/mkv_episode_matcher-vob", "*/mkv-episode-matcher_vob/mkv_episode_matcher_vob"]
+tests = ["tests", "*/mkv_episode_matcher_vob/tests"]
 
 [tool.coverage.report]
 exclude_lines = [
