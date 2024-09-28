@@ -6,15 +6,15 @@ build-backend = "setuptools.build_meta"
 # See configuration details in https://github.com/pypa/setuptools_scm
 
 [project]
-name = "mkv-episode-matcher"
-description = "The MKV Episode Matcher is a tool for identifying TV series episodes from MKV files and renaming the files accordingly."
+name = "mkv-episode-matcher-vob"
+description = "The MKV Episode Matcher VOB is a fork of MKV Episode Matcher for identifying TV series episodes from MKV files and renaming the files accordingly with additional support for VOB files."
 dynamic = ["version"]
 readme = "README.rst"
 requires-python = ">=3.8"
 license = { text = "MIT" }
 keywords = []
 authors = [
-  { name = "Jsakkos", email = "jonathansakkos@protonmail.com" },
+  { name = "NiklasPrahl", email = "niklas.prahl-git@gmx.net" },
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -39,12 +39,12 @@ dependencies = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/Jsakkos/mkv-episode-matcher#readme"
-Issues = "https://github.com/Jsakkos/mkv-episode-matcher/issues"
-Source = "https://github.com/Jsakkos/mkv-episode-matcher"
+Documentation = "https://github.com/Jsakkos/mkv-episode-matcher-vob#readme"
+Issues = "https://github.com/Jsakkos/mkv-episode-matcher-vob/issues"
+Source = "https://github.com/Jsakkos/mkv-episode-matcher-vob"
 
 [project.scripts]
-mkv-match = "mkv_episode_matcher.__main__:main"
+mkv-match = "mkv_episode_matcher-vob.__main__:main"
 
 [tool.ruff.format]
 preview = true
@@ -61,16 +61,16 @@ extend-select = ["C901"]
 known-first-party = ["foo", "bar"]
 
 [tool.coverage.run]
-source_pkgs = ["mkv_episode_matcher", "tests"]
+source_pkgs = ["mkv_episode_matcher-vob", "tests"]
 branch = true
 parallel = true
 omit = [
-  "mkv-episode-matcher/mkv_episode_matcher/__init__.py",
+  "mkv-episode-matcher-vob/mkv_episode_matcher-vob/__init__.py",
 ]
 
 [tool.coverage.paths]
-calcy = ["mkv-episode-matcher/mkv_episode_matcher", "*/mkv-episode-matcher/mkv_episode_matcher"]
-tests = ["tests", "*/mkv_episode_matcher/tests"]
+calcy = ["mkv-episode-matcher-vob/mkv_episode_matcher-vob", "*/mkv-episode-matcher-vob/mkv_episode_matcher-vob"]
+tests = ["tests", "*/mkv_episode_matcher-vob/tests"]
 
 [tool.coverage.report]
 exclude_lines = [
