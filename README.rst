@@ -40,8 +40,33 @@ Then add the ``--get-subs True`` flag to the CLI call
 
    python mkv-match --show-dir /path/to/show --get-subs True
 
-7. For VOBSub: The VOBSub can't be handled by FFmpeg, so you also need to download ``mkvextract`` and ``BDSup2Sub``. 
-The latter is not a  terminal application, so you need to specify the path to the ``BDSup2Sub.exe`` in the config.ini file.
+7. For VOBSub: The VOBSub can't be handled by FFmpeg, so you also need to download ``MKVToolNix`` (for mkvextract and mkvinfo) and ``BDSup2Sub``. 
+The latter needs a path specification to the ``BDSup2Sub.exe`` in the config.ini file.
+
+Troubleshooting 
+============
+
+1. Make sure that all the necessary tools are installed and properly linked.
+
+2. Check your config.ini file. Here is an example structure (MacOS): 
+
+::
+
+   [Config]
+   tmdb_api_key = YOUR_TMDB_KEY
+   open_subtitles_api_key = YOUR_OPEN-SUBTITLES_KEY
+   open_subtitles_user_agent = YOUR_API-CONSUMER_NAME
+   open_subtitles_username = YOUR_OPEN-SUBTITLES_USERNAME
+   open_subtitles_password = YOUR_OPEN-SUBTITLES_USERPASSWORD
+   bdsup2sub_path = /Applications/BDSup2Sub512.jar
+
+3. It may be necessary to also add the path for tesseract to your config.ini. Here is an example for a hombrew installtion:
+
+.. code-block:: bash
+
+  tesseract_path = /opt/homebrew/Cellar/tesseract/5.4.1/bin/tesseract
+
+(Note how the path leads to the tesseract executable)
 
 How it works
 ============
