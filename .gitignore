@@ -2,7 +2,7 @@
 *.pyc
 *.cpython*
 *.pyc
-/mkv_episode_matcher/__pycache__
+/mkv_episode_matcher-vob/__pycache__
 build/
 dist/
-mkv_episode_matcher.egg-info
+mkv_episode_matcher-vob.egg-info
