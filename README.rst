@@ -1,10 +1,10 @@
 ===================
-MKV Episode Matcher
+MKV Episode Matcher VOB
 ===================
 
 |docs|  |pypi|
 
-The MKV Episode Matcher is a tool for identifying TV series episodes from MKV files and renaming the files accordingly.
+The MKV Episode Matcher VOB is a fork of `MKV Episode Matcher <https://github.com/Jsakkos/mkv-episode-matcher>`_ for identifying TV series episodes from MKV files and renaming the files accordingly with additional support for VOB files, which are typically found in DVDs.
 
 Quick start
 ===========
