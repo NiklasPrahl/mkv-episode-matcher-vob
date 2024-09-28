@@ -27,10 +27,6 @@ The directory and subfolders must be arranged in the following structure:
   
 6. Call ``mkv-match`` with the TMDB_API_KEY and SHOW_DIR as arguments or in environment variables from your command line:
 
-7. For VOBSub: The VOBSub can't be handled by FFmpeg, so you also need to download ``mkvextract`` and ``BDSup2Sub``. 
-The latter is not a  terminal application, so you need to specify the path to the ``BDSup2Sub.exe`` in the config.ini file.
-
-
 .. code-block:: bash
 
    python mkv-match --tmdb-api-key your-api-key --show-dir /path/to/show
@@ -43,6 +39,9 @@ Then add the ``--get-subs True`` flag to the CLI call
 .. code-block:: bash
 
    python mkv-match --show-dir /path/to/show --get-subs True
+
+7. For VOBSub: The VOBSub can't be handled by FFmpeg, so you also need to download ``mkvextract`` and ``BDSup2Sub``. 
+The latter is not a  terminal application, so you need to specify the path to the ``BDSup2Sub.exe`` in the config.ini file.
 
 How it works
 ============
