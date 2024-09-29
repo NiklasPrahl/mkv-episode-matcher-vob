@@ -44,7 +44,7 @@ Issues = "https://github.com/Jsakkos/mkv-episode-matcher-vob/issues"
 Source = "https://github.com/Jsakkos/mkv-episode-matcher-vob"
 
 [project.scripts]
-mkv-match = "mkv_episode_matcher_vob.__main__:main"
+mkv-match-vob = "mkv_episode_matcher_vob.__main__:main"
 
 [tool.ruff.format]
 preview = true
