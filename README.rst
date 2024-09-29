@@ -48,7 +48,7 @@ Troubleshooting
 
 1. Make sure that all the necessary tools are installed and properly linked.
 
-2. Check your config.ini file. Here is an example structure (MacOS): 
+2. Check your config.ini file. Here is an example structure (MacOS paths): 
 
 ::
 
@@ -60,7 +60,7 @@ Troubleshooting
    open_subtitles_password = YOUR_OPEN-SUBTITLES_USERPASSWORD
    bdsup2sub_path = /Applications/BDSup2Sub512.jar
 
-3. It may be necessary to also add the path for tesseract to your config.ini. Here is an example for a hombrew installtion:
+3. It may be necessary to also add the path for tesseract to your config.ini. Here is an example for a homebrew installation:
 
 .. code-block:: bash
 
