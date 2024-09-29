@@ -49,7 +49,7 @@ def process_show(season=None, dry_run=False, get_subs=False):
         mkv_files = [
             os.path.join(show_dir, season)
             for f in os.listdir(show_dir)
-            if f.endswith(".mkv")
+            if f.endswith(".mkv") and not f.startswith('.') and os.path.isfile(os.path.join(season_path, f))
         ]
 
         season_path = os.path.join(show_dir, f"Season {season}")
@@ -63,7 +63,7 @@ def process_show(season=None, dry_run=False, get_subs=False):
                 mkv_files = [
                     os.path.join(season_path, f)
                     for f in os.listdir(season_path)
-                    if f.endswith(".mkv")
+                    if f.endswith(".mkv") and not f.startswith('.') and os.path.isfile(os.path.join(season_path, f))
                 ]
             else:
                 logger.error(f"'{season_path}' is not a directory, skipping.")
