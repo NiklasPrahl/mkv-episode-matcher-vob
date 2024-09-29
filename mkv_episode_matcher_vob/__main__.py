@@ -12,21 +12,21 @@ logger.info("Starting the application")
 
 
 # Check if the configuration directory exists, if not create it
-if not os.path.exists(os.path.join(os.path.expanduser("~"), ".mkv-episode-matcher")):
-    os.makedirs(os.path.join(os.path.expanduser("~"), ".mkv-episode-matcher"))
+if not os.path.exists(os.path.join(os.path.expanduser("~"), ".mkv-episode-matcher-vob")):
+    os.makedirs(os.path.join(os.path.expanduser("~"), ".mkv-episode-matcher-vob"))
 
 # Define the paths for the configuration file and cache directory
 CONFIG_FILE = os.path.join(
-    os.path.expanduser("~"), ".mkv-episode-matcher", "config.ini"
+    os.path.expanduser("~"), ".mkv-episode-matcher-vob", "config.ini"
 )
-CACHE_DIR = os.path.join(os.path.expanduser("~"), ".mkv-episode-matcher", "cache")
+CACHE_DIR = os.path.join(os.path.expanduser("~"), ".mkv-episode-matcher-vob", "cache")
 
 # Check if the cache directory exists, if not create it
 if not os.path.exists(CACHE_DIR):
     os.makedirs(CACHE_DIR)
 
 # Check if logs directory exists, if not create it
-log_dir = os.path.join(os.path.expanduser("~"), ".mkv-episode-matcher", "logs")
+log_dir = os.path.join(os.path.expanduser("~"), ".mkv-episode-matcher-vob", "logs")
 if not os.path.exists(log_dir):
     os.mkdir(log_dir)
 
